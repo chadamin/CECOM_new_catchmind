@@ -60,7 +60,12 @@ button:hover {
 
 /* 타이머 5초 이하 깜빡임 */
 .blink {
-  animation: blink 1s infinite;
+  animation: blink 0.5s infinite;
+}
+
+/* 타이머 5초 이하 위험 상태 */
+#timer.danger {
+  color: #e74c3c !important;
 }
 
 @keyframes blink {
