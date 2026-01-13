@@ -1,3 +1,4 @@
+// game.js
 const Game = {
   isPlaying: false,
 
@@ -18,7 +19,7 @@ const Game = {
 
     document.getElementById('result-screen').style.display = 'flex';
 
-    // ✨ 아무것도 안 그린 경우
+    // ✨ 아무것도 안 그림
     if (!Canvas.hasDrawn) {
       document.getElementById('result-text').innerText = '그림 없음';
       document.getElementById('ai-thought').innerText =
@@ -26,7 +27,6 @@ const Game = {
       return;
     }
 
-    // ✨ 서버 CLIP 분석 시작
     document.getElementById('result-text').innerText = 'AI 생각 중...';
     document.getElementById('ai-thought').innerText = '';
 
@@ -39,7 +39,7 @@ const Game = {
       try {
         const response = await fetch('http://127.0.0.1:8000/clip-test', {
           method: 'POST',
-          body: formData,
+          body: formData, // ⚠️ Content-Type 직접 지정 ❌
         });
 
         if (!response.ok) {
@@ -64,10 +64,13 @@ const Game = {
 
     if (confidence >= 0.8) {
       document.getElementById('ai-thought').innerText =
-        `이건 거의 "${guess}" 같은데요?`;
+        `이건 거의 "${guess}" 같아요! 😄`;
+    } else if (confidence >= 0.5) {
+      document.getElementById('ai-thought').innerText =
+        `혹시 "${guess}"을(를) 그렸나요? 🤔`;
     } else {
       document.getElementById('ai-thought').innerText =
-        `혹시 "${guess}"을(를) 그렸나요?`;
+        '음… 잘 모르겠어요 😅';
     }
   },
 
