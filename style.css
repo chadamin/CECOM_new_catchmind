@@ -1,78 +1,233 @@
+/* =====================
+   1. Base / Reset
+===================== */
+
 body {
-  text-align: center;
+  margin: 0;
   font-family: 'Malgun Gothic', sans-serif;
-  background-color: #f0f2f5;
+  background-color: #DCE2F1;
+  text-align: center;
 }
 
-#canvas-container {
-  margin: 20px auto;
-  border: 5px solid #333;
-  width: 400px;
-  height: 400px;
-  background-color: white;
+main {
+  min-height: 100vh;
 }
 
-.stats {
-  font-size: 20px;
-  font-weight: bold;
-  margin: 10px;
-}
+/* =====================
+   2. Screen Layout
+===================== */
 
-#timer {
-  color: black;
-  font-size: 30px;
-}
-
-button {
-  padding: 10px 20px;
-  font-size: 16px;
-  cursor: pointer;
-  background-color: #4CAF50;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  margin: 5px;
-}
-
-button:hover {
-  background-color: #45a049;
-}
-
-#result-screen {
+.screen {
   display: none;
+  min-height: 100vh;
+  padding: 40px 20px;
+  box-sizing: border-box;
+}
+
+#start-screen {
+  display: block; /* 최초 화면 */
+}
+
+.overlay {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.85);
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
   color: white;
+  display: none;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   z-index: 999;
 }
 
+/* =====================
+   3. Start Screen
+===================== */
+
+#start-screen h1 {
+  font-size: 48px;
+  margin-bottom: 20px;
+}
+
+#start-screen p {
+  font-size: 20px;
+  margin-bottom: 30px;
+}
+
+/* =====================
+   4. Game Screen
+===================== */
+
+.stats {
+  position: relative;   /* 🔥 기준점 */
+  width: 80px;         /* 타이머 이미지 크기 */
+  height: 80px;
+  margin: 0 auto 20px;
+}
+
+.stats img {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+#timer {
+  position: absolute;   /* 🔥 이미지 위로 */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  font-family: 'Press Start 2P', monospace;
+  font-size: 24px;
+  color: black;
+
+  -webkit-font-smoothing: none;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: geometricPrecision;
+
+  min-width: 3ch;
+  text-align: center;
+  text-shadow: 2px 2px 0 #000;
+
+  pointer-events: none;
+}
+
+
+#canvas-container {
+  margin: 20px auto;
+  width: 80%; 
+  max-width: 800px;
+  height: 450px;
+
+  /* 1. 테두리 설정: 나무틀 두께를 40px로 지정 */
+  border: 40px solid transparent; 
+  
+  /* 2. 9-슬라이스 핵심 설정 */
+  /* 이미지 파일명이 정확한지 확인하세요 (예: 칠판 전체9.png) */
+  border-image-source: url('칠판 전체.png'); 
+  
+  /* 원본 이미지에서 테두리 픽셀만큼 자릅니다. */
+  /* 수치 '40'은 모서리 크기를 의미하며, 'fill'은 중앙 녹색판을 채웁니다. */
+  border-image-slice: 40 fill; 
+  
+  /* 3. 반복 방식 설정: 'round'를 쓰면 이미지가 잘리지 않게 마디를 딱 맞춰줍니다. */
+  border-image-repeat: round; 
+
+  /* 4. 픽셀 아트 선명도 유지 */
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+
+  /* 1. 내부 요소를 중앙으로 모으는 설정 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  /* 2. 자식 요소(canvas)의 기준점이 되도록 설정 */
+  position: relative; 
+  
+  /* 3. 테두리 안쪽으로 캔버스가 들어오도록 여백 조정 */
+  /* 나무 틀의 실제 두께에 맞춰 padding 값을 조절하세요 */
+  padding: 40px; 
+  box-sizing: border-box;
+}
+
+/* 칠판 내부 캔버스 설정 */
+#canvas-container canvas {
+  background-color: transparent !important; /* 캔버스 배경 투명화 */
+  display: block;
+  width: 200%;
+  height: 120%;
+
+  object-fit: contain;
+}
+
+.controls {
+  margin-top: 20px;
+}
+
+/* =====================
+   5. Result Screen
+===================== */
+
 #result-text {
   font-size: 48px;
   margin-bottom: 20px;
 }
 
-/* 타이머 5초 이하 깜빡임 */
+#ai-thought {
+  font-size: 20px;
+  margin-bottom: 30px;
+}
+
+/* =====================
+   6. Buttons
+===================== */
+
+/* 텍스트 버튼 (제출하기) */
+.submit-btn {
+  padding: 12px 25px;
+  font-size: 18px;
+  margin: 8px;
+
+  background-color: #4CAF50;
+  color: white;
+
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.submit-btn:hover {
+  background-color: #45a049;
+}
+
+/* 이미지 버튼 (다시 그리기) */
+.reset-btn {
+  width: 100px;
+  height: 40px;
+  margin: 8px;
+
+  position: absolute;
+
+  bottom: 220px;    /* ← 받침대 위로 올리는 핵심 */
+  right: 420px;   /* ← 제출하기 버튼과 간격 */
+
+  padding: 0;
+  border: none;
+  border-radius: 0;
+
+  background: url("szrestart.png") no-repeat center / contain;
+  background-color: transparent;
+
+  image-rendering: pixelated;
+  cursor: pointer;
+}
+
+.reset-btn:hover {
+  background-color: transparent;
+}
+
+.reset-btn:active {
+  transform: translateY(1px);
+}
+
+
+
+/* =====================
+   7. Timer Effects
+===================== */
+
+#timer.danger {
+  color: #e74c3c;
+}
+
 .blink {
   animation: blink 0.5s infinite;
 }
 
-/* 타이머 5초 이하 위험 상태 */
-#timer.danger {
-  color: #e74c3c !important;
-}
-
 @keyframes blink {
-  50% { opacity: 0.3; }
-}
-
-.active {
-  display: block !important;
+  50% {
+    opacity: 0.3;
+  }
 }
 

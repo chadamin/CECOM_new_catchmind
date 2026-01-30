@@ -1,3 +1,4 @@
+
 const Timer = {
   time: 20,
   interval: null,

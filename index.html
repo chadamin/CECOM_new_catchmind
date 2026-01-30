@@ -5,76 +5,54 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>AI 캐치마인드</title>
 
-  <!-- p5.js (캔버스 그림용) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+
+  <!-- p5 / ml5 -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+  <script src="https://unpkg.com/ml5@0.12.2/dist/ml5.min.js"></script>
 
-  <!-- 스타일 -->
   <link rel="stylesheet" href="style.css">
-
-  <style>
-    body {
-      text-align: center;
-      font-family: 'Malgun Gothic', sans-serif;
-      background-color: #eef2f7;
-      padding: 30px;
-    }
-
-    #game-screen { display: none; }
-
-    #result-screen {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.85);
-      color: white;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      z-index: 10;
-    }
-
-    #canvas-container {
-      margin: 20px auto;
-      width: 400px;
-      height: 400px;
-      border: 6px solid #333;
-      background: white;
-    }
-
-    button {
-      padding: 12px 25px;
-      font-size: 18px;
-      margin: 8px;
-      cursor: pointer;
-    }
-  </style>
 </head>
 
 <body>
 
-  <!-- 시작 화면 -->
-  <div id="start-screen">
-    <h1>🎨 AI 캐치마인드</h1>
-    <p>20초 안에 그림을 그려보세요!</p>
-    <button onclick="Game.start()">🎮 게임 시작</button>
-  </div>
+  <main>
 
-  <!-- 게임 화면 -->
-  <div id="game-screen">
-    <h2>남은 시간: <span id="timer">20</span>초</h2>
-    <div id="canvas-container"></div>
-    <button onclick="Game.submit()">제출하기</button>
-    <button onclick="Game.reset()">다시 그리기</button>
-  </div>
+    <!-- 시작 화면 -->
+    <section id="start-screen" class="screen">
+      <h1>🎨 AI 캐치마인드</h1>
+      <p>20초 안에 그림을 그려보세요!</p>
+      <button class="submit-btn" onclick="Game.start()">🎮 게임 시작</button>
+    </section>
 
-  <!-- 결과 화면 -->
-  <div id="result-screen">
-    <h1 id="result-text"></h1>
-    <p id="ai-thought"></p>
-    <button onclick="Game.restart()">다시 도전</button>
-  </div>
+    <!-- 게임 화면 -->
+    <section id="game-screen" class="screen">
+      <div class="stats">
+        <img src="sztimer.png" alt="timer background">
+        <span id="timer">20</span>
+      </div>
 
-  <!-- JS 로드 순서 (중요) -->
+      <div id="canvas-container"></div>
+
+      <div class="controls">
+        <button class="submit-btn" onclick="Game.submit()">제출하기</button>
+        <button class="reset-btn" onclick="Game.reset()" aria-label="다시 그리기"></button>
+      </div>
+
+    </section>
+
+    <!-- 결과 화면 -->
+    <section id="result-screen" class="screen overlay">
+      <h1 id="result-text"></h1>
+      <p id="ai-thought"></p>
+      <button class="submit-btn" onclick="Game.restart()">다시 도전</button>
+    </section>
+
+  </main>
+
+  <!-- JS -->
   <script src="canvas.js"></script>
   <script src="timer.js"></script>
   <script src="ai.js"></script>
@@ -83,3 +61,4 @@
 
 </body>
 </html>
+
