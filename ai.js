@@ -6,17 +6,18 @@ const AI = {
 
   async classify(canvas, callback) {
     try {
-      // canvas → base64 이미지
-      const imageBase64 = canvas.toDataURL("image/png");
+      // canvas → Blob
+      const blob = await new Promise(resolve =>
+        canvas.toBlob(resolve, "image/png")
+      );
+
+      // multipart/form-data 구성
+      const formData = new FormData();
+      formData.append("image", blob, "drawing.png");
 
       const res = await fetch("http://127.0.0.1:8000/clip-test", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          image: imageBase64
-        })
+        body: formData
       });
 
       if (!res.ok) {
@@ -28,21 +29,20 @@ const AI = {
       /**
        * 서버 응답 예시:
        * {
-       *   "a cat": 0.72,
-       *   "a dog": 0.12,
-       *   ...
+       *   category: "shape",
+       *   guess: "triangle",
+       *   confidence: 0.07,
+       *   status: "unknown"
        * }
        */
 
-      // 가장 높은 유사도 선택
-      const best = Object.entries(data)
-        .sort((a, b) => b[1] - a[1])[0];
-
-      // game.js에서 기대하는 형식으로 변환
+      // game.js에서 쓰기 좋은 형태로 전달
       callback([
         {
-          label: best[0],
-          confidence: best[1]
+          label: data.guess,
+          confidence: data.confidence,
+          category: data.category,
+          status: data.status
         }
       ]);
 
