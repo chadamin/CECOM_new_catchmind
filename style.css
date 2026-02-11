@@ -164,7 +164,7 @@ main {
 ===================== */
 
 /* 텍스트 버튼 (제출하기) */
-.submit-btn {
+.start-btn {
   padding: 12px 25px;
   font-size: 18px;
   margin: 8px;
@@ -177,8 +177,33 @@ main {
   cursor: pointer;
 }
 
+.submit-btn {
+  width: 360px;
+  height: 360px;
+  margin: 8px;
+
+  position: absolute;
+
+  bottom: 20px;    /* ← 받침대 위로 올리는 핵심 */
+  right: 50px;   /* ← 제출하기 버튼과 간격 */
+
+  padding: 0;
+  border: none;
+  border-radius: 0;
+
+  background: url("제출푸앙1.png") no-repeat center / contain;
+  background-color: transparent;
+
+  image-rendering: pixelated;
+  cursor: pointer;
+}
+
 .submit-btn:hover {
-  background-color: #45a049;
+  background-color: transparent;
+}
+
+.submit-btn:active {
+  background: url("제출푸앙2.png") no-repeat center / contain;
 }
 
 /* 이미지 버튼 (다시 그리기) */
