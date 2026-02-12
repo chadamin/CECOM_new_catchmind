@@ -24,7 +24,7 @@
     <section id="start-screen" class="screen">
       <h1>🎨 AI 캐치마인드</h1>
       <p>20초 안에 그림을 그려보세요!</p>
-      <button class="submit-btn" onclick="Game.start()">🎮 게임 시작</button>
+      <button class="start-btn" onclick="Game.start()">🎮 게임 시작</button>
     </section>
 
     <!-- 게임 화면 -->
@@ -37,7 +37,7 @@
       <div id="canvas-container"></div>
 
       <div class="controls">
-        <button class="submit-btn" onclick="Game.submit()">제출하기</button>
+        <button class="submit-btn" onclick="Game.submit()"aria-label="제출하기"></button>
         <button class="reset-btn" onclick="Game.reset()" aria-label="다시 그리기"></button>
       </div>
 
@@ -47,7 +47,7 @@
     <section id="result-screen" class="screen overlay">
       <h1 id="result-text"></h1>
       <p id="ai-thought"></p>
-      <button class="submit-btn" onclick="Game.restart()">다시 도전</button>
+      <button class="start-btn" onclick="Game.restart()">다시 도전</button>
     </section>
 
   </main>
