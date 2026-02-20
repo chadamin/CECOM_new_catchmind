@@ -237,8 +237,8 @@ main {
 
   position: absolute;
 
-  bottom: 20px;    /* ← 받침대 위로 올리는 핵심 */
-  right: 50px;   /* ← 제출하기 버튼과 간격 */
+  bottom: 50px;    /* ← 받침대 위로 올리는 핵심 */
+  right: 0px;   /* ← 제출하기 버튼과 간격 */
 
   padding: 0;
   border: none;
@@ -261,14 +261,14 @@ main {
 
 /* 이미지 버튼 (다시 그리기) */
 .reset-btn {
-  width: 140px;
-  height: 56px;
+  width: 150px;
+  height: 60px;
   margin: 8px;
 
   position: absolute;
 
-  bottom: 180px;    /* ← 받침대 위로 올리는 핵심 */
-  right: 400px;   /* ← 제출하기 버튼과 간격 */
+  bottom: 5px;    /* ← 받침대 위로 올리는 핵심 */
+  right: 80px;   /* ← 제출하기 버튼과 간격 */
 
   padding: 0;
   border: none;
@@ -299,6 +299,7 @@ main {
   border-radius: 6px; 
   cursor: pointer; 
 }
+
 
 
 

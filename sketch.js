@@ -3,7 +3,7 @@
 
 function setup() {
   // p5 캔버스 생성은 여기서
-  createCanvas(600, 320).parent('canvas-container');
+  createCanvas(800, 500).parent('canvas-container');
 }
 
 function draw() {
