@@ -26,4 +26,3 @@ const Canvas = {
     return document.querySelector('canvas');
   }
 };
-ad

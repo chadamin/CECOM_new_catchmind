@@ -3,8 +3,11 @@ const Game = {
   isPlaying: false,
 
   start() {
-    document.getElementById('start-screen').style.display = 'none';
-    document.getElementById('game-screen').style.display = 'block';
+    const startScreen = document.getElementById("start-screen");
+    const gameScreen = document.getElementById("game-screen");
+
+    startScreen.classList.remove("active");
+    gameScreen.classList.add("active");
 
     this.isPlaying = true;
     Canvas.clear();
@@ -17,7 +20,8 @@ const Game = {
     this.isPlaying = false;
     Timer.stop();
 
-    document.getElementById('result-screen').style.display = 'flex';
+    const resultScreen = document.getElementById("result-screen");
+    resultScreen.classList.add("active");
 
     // ✨ 아무것도 안 그림
     if (!Canvas.hasDrawn) {
@@ -80,8 +84,14 @@ const Game = {
   },
 
   restart() {
-    document.getElementById('result-screen').style.display = 'none';
-    document.getElementById('game-screen').style.display = 'none';
-    document.getElementById('start-screen').style.display = 'block';
-  }
+    const startScreen = document.getElementById("start-screen");
+    const gameScreen = document.getElementById("game-screen");
+    const resultScreen = document.getElementById("result-screen");
+
+    resultScreen.classList.remove("active");
+    gameScreen.classList.remove("active");
+    startScreen.classList.add("active");
+
+    this.isPlaying = false;
+  } 
 };

@@ -19,14 +19,17 @@ main {
 
 .screen {
   display: none;
-  min-height: 100vh;
-  padding: 40px 20px;
-  box-sizing: border-box;
+  height: 100vh;
+
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
-#start-screen {
-  display: block; /* 최초 화면 */
+.screen.active {
+  display: flex;
 }
+
 
 .overlay {
   position: fixed;
@@ -58,8 +61,8 @@ main {
 #start-board {
   margin: 20px auto;
   width: 80%;
-  max-width: 800px;
-  height: 450px;
+  max-width: 1120px;
+  height: 630px;
 
   border: 40px solid transparent;
   border-image-source: url('sztart_screen.png');
@@ -96,8 +99,8 @@ main {
 #canvas-container {
   margin: 20px auto;
   width: 80%; 
-  max-width: 800px;
-  height: 450px;
+  max-width: 1120px;
+  height: 630px;
 
   /* 1. 테두리 설정: 나무틀 두께를 40px로 지정 */
   border: 40px solid transparent; 
@@ -135,54 +138,59 @@ main {
 #canvas-container canvas {
   background-color: transparent !important; /* 캔버스 배경 투명화 */
   display: block;
-  width: 200%;
-  height: 120%;
+  width: 100%;
+  height: 100%;
 
   object-fit: contain;
 }
 
 .controls {
-  position: relative;
-  margin-top: 20px;
+  position: absolute;
+  inset: 0;
+  z-index: 5;
 }
+
+/* 캔버스만 화면 중앙 */
+.canvas-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 75vh;   /* 화면 기준 중앙 확보 */
+}
+
 
 /* =====================
-   Pixel Battery Timer
+   Chalk Timer (칠판 위)
 ===================== */
 
-.timer-wrapper {
-  width: 400px;
-  height: 28px;
+.chalk-timer {
+  position: absolute;
+  bottom: 70px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-0.5deg);
 
-  margin: 60px auto 20px; /* 캔버스 아래 간격 */
-  
-  border: 0;              /* 테두리 제거 */
-  background-color: #000;  /* 바깥 배경 */
-  
-  display: flex;
-  align-items: center;
+  width: 60%;
+  height: 14px;
 
-  image-rendering: pixelated;
-  image-rendering: crisp-edges;
-  box-sizing: border-box;
+  pointer-events: none;
 }
 
-.timer-bar {
+.chalk-bar {
   height: 100%;
   width: 100%;
-  
-  display: flex;
 
-  /* 픽셀 블록 느낌 */
-  background: repeating-linear-gradient(
-    90deg,
-    #00ff88,
-    #00ff88 8px,
-    #2ecc71 8px,
-    #2ecc71 16px
+  background-color: #f5f5f5;
+
+  border-radius: 6px;
+
+  opacity: 0.9;
+
+  /* 살짝 지워지는 느낌 */
+  background: linear-gradient(
+    to right,
+    #f5f5f5 92%,
+    rgba(255,255,255,0.2) 100%
   );
-
-  transition: none; /* 칸 단위 딱딱 느낌 */
 }
 
 /* =====================
@@ -253,14 +261,14 @@ main {
 
 /* 이미지 버튼 (다시 그리기) */
 .reset-btn {
-  width: 100px;
-  height: 40px;
+  width: 140px;
+  height: 56px;
   margin: 8px;
 
   position: absolute;
 
-  bottom: 220px;    /* ← 받침대 위로 올리는 핵심 */
-  right: 420px;   /* ← 제출하기 버튼과 간격 */
+  bottom: 180px;    /* ← 받침대 위로 올리는 핵심 */
+  right: 400px;   /* ← 제출하기 버튼과 간격 */
 
   padding: 0;
   border: none;

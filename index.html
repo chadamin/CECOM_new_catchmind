@@ -21,24 +21,33 @@
   <main>
 
     <!-- 시작 화면 -->
-    <section id="start-screen" class="screen">
-
+    <section id="start-screen" class="screen active">
+     
       <div id="start-board"></div>
       <button class="start-btn" onclick="Game.start()">🎮 게임 시작</button>
+    
     </section>
 
     <!-- 게임 화면 -->
     <section id="game-screen" class="screen">
-      <div id="canvas-container"></div>
-      
-      <div class="timer-wrapper">
-        <div id="timer-bar" class="timer-bar"></div>
-      </div>
 
-      <div class="controls">
-        <button class="submit-btn" onclick="Game.submit()"aria-label="제출하기"></button>
-        <button class="reset-btn" onclick="Game.reset()" aria-label="다시 그리기"></button>
+      
+      <div id="canvas-container">
+
+        <!-- ✅ 타이머를 칠판 안으로 이동 -->
+
+        <div class="controls">
+          <button class="submit-btn" onclick="Game.submit()" aria-label="제출하기"></button>
+          <button class="reset-btn" onclick="Game.reset()" aria-label="다시 그리기"></button>
+        </div>
+
+        <div class="chalk-timer">
+          <div id="chalk-bar" class="chalk-bar"></div>
+        </div>
+     
       </div>
+      
+      
 
     </section>
 
