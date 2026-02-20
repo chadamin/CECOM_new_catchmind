@@ -54,44 +54,44 @@ main {
   margin-bottom: 30px;
 }
 
+/* 시작 화면 칠판 박스 */
+#start-board {
+  margin: 20px auto;
+  width: 80%;
+  max-width: 800px;
+  height: 450px;
+
+  border: 40px solid transparent;
+  border-image-source: url('sztart_screen.png');
+  border-image-slice: 40 fill;
+  border-image-repeat: round;
+
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 40px;
+  box-sizing: border-box;
+
+  position: relative;
+}
+
+/* 내부 이미지 */
+#start-board img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  image-rendering: pixelated;
+}
+
+
+
 /* =====================
    4. Game Screen
 ===================== */
-
-.stats {
-  position: relative;   /* 🔥 기준점 */
-  width: 80px;         /* 타이머 이미지 크기 */
-  height: 80px;
-  margin: 0 auto 20px;
-}
-
-.stats img {
-  width: 100%;
-  height: 100%;
-  display: block;
-}
-
-#timer {
-  position: absolute;   /* 🔥 이미지 위로 */
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-
-  font-family: 'Press Start 2P', monospace;
-  font-size: 24px;
-  color: black;
-
-  -webkit-font-smoothing: none;
-  -moz-osx-font-smoothing: grayscale;
-  text-rendering: geometricPrecision;
-
-  min-width: 3ch;
-  text-align: center;
-  text-shadow: 2px 2px 0 #000;
-
-  pointer-events: none;
-}
-
 
 #canvas-container {
   margin: 20px auto;
@@ -142,7 +142,47 @@ main {
 }
 
 .controls {
+  position: relative;
   margin-top: 20px;
+}
+
+/* =====================
+   Pixel Battery Timer
+===================== */
+
+.timer-wrapper {
+  width: 400px;
+  height: 28px;
+
+  margin: 60px auto 20px; /* 캔버스 아래 간격 */
+  
+  border: 0;              /* 테두리 제거 */
+  background-color: #000;  /* 바깥 배경 */
+  
+  display: flex;
+  align-items: center;
+
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+  box-sizing: border-box;
+}
+
+.timer-bar {
+  height: 100%;
+  width: 100%;
+  
+  display: flex;
+
+  /* 픽셀 블록 느낌 */
+  background: repeating-linear-gradient(
+    90deg,
+    #00ff88,
+    #00ff88 8px,
+    #2ecc71 8px,
+    #2ecc71 16px
+  );
+
+  transition: none; /* 칸 단위 딱딱 느낌 */
 }
 
 /* =====================
@@ -165,9 +205,14 @@ main {
 
 /* 텍스트 버튼 (제출하기) */
 .start-btn {
+  position: absolute;
+
+  bottom: 300px;     /* 위아래 위치 조절 */
+  left: 50%;
+  transform: translateX(-50%);
+
   padding: 12px 25px;
   font-size: 18px;
-  margin: 8px;
 
   background-color: #4CAF50;
   color: white;
@@ -236,23 +281,17 @@ main {
   transform: translateY(1px);
 }
 
-
-
-/* =====================
-   7. Timer Effects
-===================== */
-
-#timer.danger {
-  color: #e74c3c;
+.restart-btn { 
+  padding: 12px 25px; 
+  font-size: 18px; 
+  margin: 8px; 
+  background-color: #4CAF50; 
+  color: white; 
+  border: none; 
+  border-radius: 6px; 
+  cursor: pointer; 
 }
 
-.blink {
-  animation: blink 0.5s infinite;
-}
 
-@keyframes blink {
-  50% {
-    opacity: 0.3;
-  }
-}
+
 

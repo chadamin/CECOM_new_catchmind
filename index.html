@@ -22,19 +22,18 @@
 
     <!-- 시작 화면 -->
     <section id="start-screen" class="screen">
-      <h1>🎨 AI 캐치마인드</h1>
-      <p>20초 안에 그림을 그려보세요!</p>
+
+      <div id="start-board"></div>
       <button class="start-btn" onclick="Game.start()">🎮 게임 시작</button>
     </section>
 
     <!-- 게임 화면 -->
     <section id="game-screen" class="screen">
-      <div class="stats">
-        <img src="sztimer.png" alt="timer background">
-        <span id="timer">20</span>
-      </div>
-
       <div id="canvas-container"></div>
+      
+      <div class="timer-wrapper">
+        <div id="timer-bar" class="timer-bar"></div>
+      </div>
 
       <div class="controls">
         <button class="submit-btn" onclick="Game.submit()"aria-label="제출하기"></button>
@@ -47,7 +46,7 @@
     <section id="result-screen" class="screen overlay">
       <h1 id="result-text"></h1>
       <p id="ai-thought"></p>
-      <button class="start-btn" onclick="Game.restart()">다시 도전</button>
+      <button class="restart-btn" onclick="Game.restart()">다시 도전</button>
     </section>
 
   </main>
@@ -58,7 +57,9 @@
   <script src="ai.js"></script>
   <script src="game.js"></script>
   <script src="sketch.js"></script>
+  
 
 </body>
 </html>
+
 
