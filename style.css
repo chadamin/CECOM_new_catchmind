@@ -65,7 +65,7 @@ main {
   height: 630px;
 
   border: 40px solid transparent;
-  border-image-source: url('sztart_screen.png');
+  border-image-source: url('sztart_screen.svg');
   border-image-slice: 40 fill;
   border-image-repeat: round;
 
@@ -107,7 +107,7 @@ main {
   
   /* 2. 9-슬라이스 핵심 설정 */
   /* 이미지 파일명이 정확한지 확인하세요 (예: 칠판 전체9.png) */
-  border-image-source: url('칠판 전체.png'); 
+  border-image-source: url('칠판 전체.svg'); 
   
   /* 원본 이미지에서 테두리 픽셀만큼 자릅니다. */
   /* 수치 '40'은 모서리 크기를 의미하며, 'fill'은 중앙 녹색판을 채웁니다. */
@@ -274,7 +274,7 @@ main {
   border: none;
   border-radius: 0;
 
-  background: url("szrestart.png") no-repeat center / contain;
+  background: url("szrestart.svg") no-repeat center / contain;
   background-color: transparent;
 
   image-rendering: pixelated;
