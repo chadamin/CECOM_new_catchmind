@@ -237,14 +237,14 @@ main {
 
   position: absolute;
 
-  bottom: 50px;    /* ← 받침대 위로 올리는 핵심 */
+  bottom: -60px;    /* ← 받침대 위로 올리는 핵심 */
   right: 0px;   /* ← 제출하기 버튼과 간격 */
 
   padding: 0;
   border: none;
   border-radius: 0;
 
-  background: url("제출푸앙1.png") no-repeat center / contain;
+  background: url("제출푸앙_n.svg") no-repeat center / contain;
   background-color: transparent;
 
   image-rendering: pixelated;
@@ -255,9 +255,6 @@ main {
   background-color: transparent;
 }
 
-.submit-btn:active {
-  background: url("제출푸앙2.png") no-repeat center / contain;
-}
 
 /* 이미지 버튼 (다시 그리기) */
 .reset-btn {
@@ -268,7 +265,7 @@ main {
   position: absolute;
 
   bottom: 6px;    /* ← 받침대 위로 올리는 핵심 */
-  right: 85px;   /* ← 제출하기 버튼과 간격 */
+  left: 85px;   /* ← 제출하기 버튼과 간격 */
 
   padding: 0;
   border: none;
