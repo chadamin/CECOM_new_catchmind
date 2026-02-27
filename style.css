@@ -65,7 +65,7 @@ main {
   height: 630px;
 
   border: 40px solid transparent;
-  border-image-source: url('sztart_screen.svg');
+  border-image-source: url('sztart_screen.png');
   border-image-slice: 40 fill;
   border-image-repeat: round;
 
@@ -107,7 +107,7 @@ main {
   
   /* 2. 9-슬라이스 핵심 설정 */
   /* 이미지 파일명이 정확한지 확인하세요 (예: 칠판 전체9.png) */
-  border-image-source: url('칠판 전체.svg'); 
+  border-image-source: url('칠판 전체.png'); 
   
   /* 원본 이미지에서 테두리 픽셀만큼 자릅니다. */
   /* 수치 '40'은 모서리 크기를 의미하며, 'fill'은 중앙 녹색판을 채웁니다. */
@@ -261,14 +261,14 @@ main {
 
 /* 이미지 버튼 (다시 그리기) */
 .reset-btn {
-  width: 150px;
-  height: 60px;
+  width: 155px;
+  height: 63px;
   margin: 8px;
 
   position: absolute;
 
-  bottom: 5px;    /* ← 받침대 위로 올리는 핵심 */
-  right: 80px;   /* ← 제출하기 버튼과 간격 */
+  bottom: 6px;    /* ← 받침대 위로 올리는 핵심 */
+  right: 85px;   /* ← 제출하기 버튼과 간격 */
 
   padding: 0;
   border: none;
