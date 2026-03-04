@@ -34,8 +34,6 @@ main {
 .overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.85);
-  color: white;
   display: none;
   justify-content: center;
   align-items: center;
@@ -60,9 +58,9 @@ main {
 /* 시작 화면 칠판 박스 */
 #start-board {
   margin: 20px auto;
-  width: 80%;
-  max-width: 1120px;
-  height: 630px;
+  width: 90%;
+  max-width: 1280px;
+  height: 720px;
 
   border: 40px solid transparent;
   border-image-source: url('sztart_screen.png');
@@ -99,8 +97,8 @@ main {
 #canvas-container {
   margin: 20px auto;
   width: 80%; 
-  max-width: 1120px;
-  height: 630px;
+  max-width: 1280px;
+  height: 720px;
 
   /* 1. 테두리 설정: 나무틀 두께를 40px로 지정 */
   border: 40px solid transparent; 
@@ -165,7 +163,7 @@ main {
 
 .chalk-timer {
   position: absolute;
-  bottom: 70px;
+  top: 70px;
   left: 50%;
   transform: translateX(-50%) rotate(-0.5deg);
 
@@ -197,8 +195,24 @@ main {
    5. Result Screen
 ===================== */
 
+
+
+.result-png {
+  position: absolute;   /* 이게 핵심 */
+  top: 100px;           /* 위에서 200px */
+  left: 230px;          /* 왼쪽에서 300px */
+  width: 910px;
+  height: 540px;
+
+  background: url("말풍선.png") no-repeat center;
+  background-size: contain;
+  z-index: 1;
+}
+
+
 #result-text {
   font-size: 48px;
+  color: black;
   margin-bottom: 20px;
 }
 
@@ -295,6 +309,7 @@ main {
   border: none; 
   border-radius: 6px; 
   cursor: pointer; 
+  z-index: 10;
 }
 
 
