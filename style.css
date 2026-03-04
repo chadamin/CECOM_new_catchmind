@@ -211,14 +211,21 @@ main {
 
 
 #result-text {
+  position: absolute;
+  top: 150px;     /* 말풍선 안에서 위쪽 위치 */
+  left: 50%;
+  transform: translateX(-50%);
   font-size: 48px;
   color: black;
-  margin-bottom: 20px;
 }
 
 #ai-thought {
+  position: absolute;
+  top: 250px;     /* result-text보다 아래 */
+  left: 50%;
+  transform: translateX(-50%);
   font-size: 20px;
-  margin-bottom: 30px;
+  color: black;
 }
 
 /* =====================
@@ -301,6 +308,11 @@ main {
 }
 
 .restart-btn { 
+  position: absolute;
+  bottom: 100px;      /* 말풍선 아래쪽에서 60px 위 */
+  left: 50%;
+  transform: translateX(-50%);
+
   padding: 12px 25px; 
   font-size: 18px; 
   margin: 8px; 

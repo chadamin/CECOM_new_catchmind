@@ -27,7 +27,7 @@ const Game = {
     if (!Canvas.hasDrawn) {
       document.getElementById('result-text').innerText = '그림 없음';
       document.getElementById('ai-thought').innerText =
-        '아직 아무것도 그리지 않았어요 😅';
+        '아직 아무것도 그리지 않았푸앙...';
       return;
     }
 
