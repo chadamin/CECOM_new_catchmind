@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<svg version="1.1" width="300" height="150" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges">
+<rect x="24" y="5" width="10" height="81" fill="#000000" />
+<rect x="170" y="51" width="30" height="10" fill="#000000" />
+<rect x="106" y="55" width="10" height="10" fill="#000000" />
+<rect x="160" y="60" width="10" height="76" fill="#000000" />
+<rect x="200" y="61" width="10" height="24" fill="#000000" />
+<rect x="116" y="65" width="10" height="10" fill="#000000" />
+<rect x="126" y="75" width="10" height="10" fill="#000000" />
+<rect x="230" y="82" width="25" height="10" fill="#000000" />
+<rect x="136" y="85" width="10" height="11" fill="#000000" />
+<rect x="170" y="85" width="30" height="10" fill="#000000" />
+<rect x="34" y="86" width="68" height="10" fill="#000000" />
+<rect x="220" y="92" width="10" height="34" fill="#000000" />
+<rect x="255" y="92" width="10" height="10" fill="#000000" />
+<rect x="200" y="95" width="10" height="41" fill="#000000" />
+<rect x="126" y="96" width="10" height="10" fill="#000000" />
+<rect x="230" y="102" width="25" height="10" fill="#000000" />
+<rect x="116" y="106" width="10" height="10" fill="#000000" />
+<rect x="106" y="116" width="10" height="10" fill="#000000" />
+<rect x="230" y="126" width="34" height="10" fill="#000000" />
+</svg>
