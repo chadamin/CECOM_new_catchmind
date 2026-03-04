@@ -154,34 +154,35 @@ main {
   left: 230px;
   width: 910px;
   height: 540px;
-  background: url("말풍선.png") no-repeat center;
+  background: url("말풍선그림자.png") no-repeat center;
   background-size: contain;
   z-index: 1;
 }
 
 #result-text {
   position: absolute;
-  top: 150px;
+  top: 80px;
   left: 50%;
   transform: translateX(-50%);
 
   font-family: 'ImHyeMin', sans-serif;
   font-weight: 700; /* Bold */
 
-  font-size: 54px;
+  font-size: 70px;
   color: #2b2b2b;
 }
 
 #ai-thought {
   position: absolute;
-  top: 250px;
+  top: 200px;
   left: 50%;
   transform: translateX(-50%);
+  width: 600px;       /* 추가 */
 
   font-family: 'ImHyeMin', sans-serif;
   font-weight: 400; /* Regular */
 
-  font-size: 30px;
+  font-size: 40px;
   color: #2b2b2b;
 }
 
