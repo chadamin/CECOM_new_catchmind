@@ -16,14 +16,14 @@ cosine similarity 기반 분류
 
 ## 🧠 사용 기술 (Tech Stack)
 ### Frontend
-HTML
-CSS
-JavaScript
-p5.js (Canvas drawing)
+- HTML
+- CSS
+- JavaScript
+- p5.js (Canvas drawing)
 ### AI / ML
-CLIP (Contrastive Language–Image Pretraining)
-Image preprocessing
-Cosine similarity 기반 분류
+- CLIP (Contrastive Language–Image Pretraining)
+- Image preprocessing
+- Cosine similarity 기반 분류
 
 ## 🧩 시스템 구조
 User Drawing
