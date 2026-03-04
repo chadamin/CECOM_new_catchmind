@@ -211,6 +211,27 @@ main {
    6. Buttons
 ===================== */
 
+.submit-btn {
+  width: 360px;
+  height: 360px;
+  margin: 8px;
+
+  position: absolute;
+
+  bottom: -100px;    /* ← 받침대 위로 올리는 핵심 */
+  right: -10px;   /* ← 제출하기 버튼과 간격 */
+
+  padding: 0;
+  border: none;
+  border-radius: 0;
+
+  background: url("제출푸앙_n1.svg") no-repeat center / contain;
+  background-color: transparent;
+
+  image-rendering: pixelated;
+  cursor: pointer;
+}
+
 /* 텍스트 버튼 (제출하기) */
 .start-btn {
   position: absolute;
@@ -227,27 +248,6 @@ main {
 
   border: none;
   border-radius: 6px;
-  cursor: pointer;
-}
-
-.submit-btn {
-  width: 360px;
-  height: 360px;
-  margin: 8px;
-
-  position: absolute;
-
-  bottom: -60px;    /* ← 받침대 위로 올리는 핵심 */
-  right: 0px;   /* ← 제출하기 버튼과 간격 */
-
-  padding: 0;
-  border: none;
-  border-radius: 0;
-
-  background: url("제출푸앙_n.svg") no-repeat center / contain;
-  background-color: transparent;
-
-  image-rendering: pixelated;
   cursor: pointer;
 }
 
