@@ -9,6 +9,12 @@ body {
   text-align: center;
 }
 
+:root {
+  --board-width: min(90vw, 1280px);
+  --board-height: calc(var(--board-width) * 9 / 16);
+  --board-max-height: 720px;
+}
+
 main {
   min-height: 100vh;
 }
@@ -43,27 +49,27 @@ main {
    3. Start Screen
 ===================== */
 
-#start-board {
+#start-board,
+#canvas-container {
   margin: 20px auto;
-  width: 90%;
-  max-width: 1280px;
-  height: 720px;
-
-  border: 40px solid transparent;
-  border-image-source: url('sztart_screen.png');
-  border-image-slice: 40 fill;
-  border-image-repeat: round;
-
-  image-rendering: pixelated;
-  image-rendering: crisp-edges;
+  width: var(--board-width);
+  height: min(var(--board-height), var(--board-max-height));
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  image-rendering: auto;
 
   display: flex;
   justify-content: center;
   align-items: center;
 
-  padding: 40px;
-  box-sizing: border-box;
   position: relative;
+  padding: 56px 68px;
+  box-sizing: border-box;
+}
+
+#start-board {
+  background-image: url("sztart_screen.png");
 }
 
 /* =====================
@@ -71,26 +77,7 @@ main {
 ===================== */
 
 #canvas-container {
-  margin: 20px auto;
-  width: 80%;
-  max-width: 1120px;
-  height: 630px;
-
-  border: 40px solid transparent;
-  border-image-source: url('칠판 전체.png');
-  border-image-slice: 40 fill;
-  border-image-repeat: round;
-
-  image-rendering: pixelated;
-  image-rendering: crisp-edges;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  position: relative;
-  padding: 40px;
-  box-sizing: border-box;
+  background-image: url("drawing_screen.png");
 }
 
 #canvas-container canvas {
@@ -118,19 +105,19 @@ main {
 
 .chalk-timer {
   position: absolute;
-  top: 70px;
+  top: 48px;
   left: 50%;
   transform: translateX(-50%) rotate(-0.5deg);
 
-  width: 60%;
-  height: 14px;
+  width: 54%;
+  height: 10px;
   pointer-events: none;
 }
 
 .chalk-bar {
   height: 100%;
   width: 100%;
-  border-radius: 6px;
+  border-radius: 5px;
   opacity: 0.9;
   background: linear-gradient(
     to right,
@@ -178,19 +165,19 @@ main {
 
 /* 제출 버튼 */
 .submit-btn {
-  width: 360px;
-  height: 360px;
+  width: clamp(280px, 26vw, 390px);
+  height: clamp(280px, 26vw, 390px);
 
   position: absolute;
-  bottom: -60px;
-  right: 0;
+  right: 56px;
+  bottom: -56px;
 
   border: none;
   padding: 0;
   background: url("제출푸앙_n1.svg") no-repeat center / contain;
   background-color: transparent;
 
-  image-rendering: pixelated;
+  image-rendering: auto;
   cursor: pointer;
 }
 
@@ -205,19 +192,19 @@ main {
 
 /* 다시 그리기 버튼 */
 .reset-btn {
-  width: 155px;
-  height: 63px;
+  width: clamp(140px, 12vw, 180px);
+  height: clamp(56px, 4.8vw, 72px);
 
   position: absolute;
-  bottom: 6px;
-  left: 85px;
+  left: 152px;
+  bottom: 64px;
 
   border: none;
   padding: 0;
   background: url("szrestart.svg") no-repeat center / contain;
   background-color: transparent;
 
-  image-rendering: pixelated;
+  image-rendering: auto;
   cursor: pointer;
 }
 
@@ -227,7 +214,7 @@ main {
 
 .start-btn {
   position: absolute;
-  bottom: 200px;
+  bottom: 220px;
   left: 50%;
   transform: translateX(-50%);
 
@@ -236,10 +223,10 @@ main {
   border: none;
   padding: 0;
 
-  background: url("startbutton.png") no-repeat center / contain;
+  background: url("startclean.png") no-repeat center / contain;
   background-color: transparent;
 
-  image-rendering: pixelated;
+  image-rendering: auto;
   cursor: pointer;
 
   transition: transform 0.15s ease, filter 0.15s ease;
@@ -269,7 +256,7 @@ main {
   border-radius: 0;
   background: url("szre.svg") no-repeat center / contain;
   background-color: transparent;
-  image-rendering: pixelated;
+  image-rendering: auto;
   cursor: pointer;
   z-index: 10;
 }
