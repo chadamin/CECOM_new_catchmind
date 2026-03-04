@@ -308,19 +308,24 @@ main {
 }
 
 .restart-btn { 
-  position: absolute;
-  bottom: 100px;      /* 말풍선 아래쪽에서 60px 위 */
-  left: 50%;
-  transform: translateX(-50%);
+  width: 200px;
+  height: 200px;
+  margin: 8px;
 
-  padding: 12px 25px; 
-  font-size: 18px; 
-  margin: 8px; 
-  background-color: #4CAF50; 
-  color: white; 
-  border: none; 
-  border-radius: 6px; 
-  cursor: pointer; 
+  position: absolute;
+
+  bottom: 80px;    /* ← 받침대 위로 올리는 핵심 */
+  left: 350px;   /* ← 제출하기 버튼과 간격 */
+
+  padding: 0;
+  border: none;
+  border-radius: 0;
+
+  background: url("szre.svg") no-repeat center / contain;
+  background-color: transparent;
+
+  image-rendering: pixelated;
+  cursor: pointer;
   z-index: 10;
 }
 
