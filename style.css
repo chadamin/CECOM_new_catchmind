@@ -151,21 +151,21 @@ main {
 ===================== */
 .result-puang {
   position: absolute;
-  bottom: 40px;     /* 위치 조절 */
+  bottom: 44px;     /* 위치 조절 */
   right: 180px;
 
-  width: 250px;     /* 크기 조절 */
+  width: 310px;     /* 크기 조절 */
   height: auto;
 
-  image-rendering: pixelated;
+  image-rendering: auto;
 }
 
 
 
 .result-png {
   position: absolute;
-  top: 100px;
-  left: 230px;
+  top: 62px;
+  left: 192px;
   width: 910px;
   height: 540px;
   background: url("말풍선그림자.png") no-repeat center;
