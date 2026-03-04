@@ -65,7 +65,6 @@ main {
 
   padding: 40px;
   box-sizing: border-box;
-
   position: relative;
 }
 
@@ -96,7 +95,6 @@ main {
   box-sizing: border-box;
 }
 
-/* 캔버스 */
 #canvas-container canvas {
   background-color: transparent !important;
   display: block;
@@ -109,11 +107,11 @@ main {
   position: absolute;
   inset: 0;
   z-index: 5;
-  pointer-events: none; /* 버튼 외 영역 클릭 방지 */
+  pointer-events: none;
 }
 
 .controls button {
-  pointer-events: auto; /* 버튼만 클릭 허용 */
+  pointer-events: auto;
 }
 
 /* =====================
@@ -147,7 +145,7 @@ main {
    Buttons
 ===================== */
 
-/* ✅ 제출 버튼 (배경 이미지 전용) */
+/* 제출 버튼 */
 .submit-btn {
   width: 360px;
   height: 360px;
@@ -165,7 +163,6 @@ main {
   cursor: pointer;
 }
 
-/* 내부 SVG 완전 차단 (혹시 남아있을 경우 대비) */
 .submit-btn svg {
   display: none !important;
 }
@@ -188,21 +185,39 @@ main {
   cursor: pointer;
 }
 
-/* 시작 버튼 */
+/* =====================
+   🔥 시작 버튼 (이미지 교체 완료)
+===================== */
+
 .start-btn {
   position: absolute;
-  bottom: 300px;
+  bottom: 200px;
   left: 50%;
   transform: translateX(-50%);
 
-  padding: 12px 25px;
-  font-size: 18px;
-
-  background-color: #4CAF50;
-  color: white;
+  width: 208px;     /* 비율 유지 (약 2:1) */
+  height: 100px;
   border: none;
-  border-radius: 6px;
+  padding: 0;
+
+  background: url("startbutton.png") no-repeat center / contain;
+  background-color: transparent;
+
+  image-rendering: pixelated;
   cursor: pointer;
+
+  transition: transform 0.15s ease, filter 0.15s ease;
+}
+
+/* hover 효과 */
+.start-btn:hover {
+  transform: translateX(-50%) scale(1.05);
+  filter: brightness(1.1);
+}
+
+/* 눌림 효과 */
+.start-btn:active {
+  transform: translateX(-50%) scale(0.96);
 }
 
 /* 결과 화면 버튼 */
