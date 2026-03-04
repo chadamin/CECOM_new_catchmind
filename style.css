@@ -56,11 +56,13 @@ main {
 .overlay {
   position: fixed;
   inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  color: white;
   display: none;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  z-index: 999;
+  z-index: 10;
 }
 
 /* =====================
@@ -147,6 +149,18 @@ main {
 /* =====================
    5. Result Screen
 ===================== */
+.result-puang {
+  position: absolute;
+  bottom: 40px;     /* 위치 조절 */
+  right: 180px;
+
+  width: 250px;     /* 크기 조절 */
+  height: auto;
+
+  image-rendering: pixelated;
+}
+
+
 
 .result-png {
   position: absolute;
@@ -213,6 +227,7 @@ main {
 
   image-rendering: auto;
   cursor: pointer;
+  z-index: 15;
 }
 
 .submit-btn svg {
