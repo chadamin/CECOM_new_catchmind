@@ -1,4 +1,22 @@
 /* =====================
+   Font
+===================== */
+
+@font-face {
+  font-family: 'ImHyeMin';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2106@1.1/IM_Hyemin-Regular.woff2') format('woff');
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'ImHyeMin';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2106@1.1/IM_Hyemin-Bold.woff2') format('woff');
+  font-weight: 700;
+  font-display: swap;
+}
+
+/* =====================
    1. Base / Reset
 ===================== */
 
@@ -146,8 +164,12 @@ main {
   top: 150px;
   left: 50%;
   transform: translateX(-50%);
-  font-size: 48px;
-  color: black;
+
+  font-family: 'ImHyeMin', sans-serif;
+  font-weight: 700; /* Bold */
+
+  font-size: 54px;
+  color: #2b2b2b;
 }
 
 #ai-thought {
@@ -155,8 +177,19 @@ main {
   top: 250px;
   left: 50%;
   transform: translateX(-50%);
-  font-size: 20px;
-  color: black;
+
+  font-family: 'ImHyeMin', sans-serif;
+  font-weight: 400; /* Regular */
+
+  font-size: 30px;
+  color: #2b2b2b;
+}
+
+/* 결과 화면 폰트 전체 적용 */
+.result-png,
+#result-text,
+#ai-thought {
+  font-family: 'ImHyeMin', sans-serif;
 }
 
 /* =====================
