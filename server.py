@@ -34,14 +34,44 @@ model, preprocess = clip.load("ViT-B/32", device=device)
 # =========================
 LABELS = {
     "animal": ["cat", "dog", "lion", "elephant", "rabbit", "fish", "whale"],
-    "shape": ["triangle", "square", "circle", "star", "heart", "arrow", "crescent moon"],
     "vehicle": ["car", "bus", "airplane", "bicycle", "train", "rocket","ship"],
-    "nature": ["tree", "flower", "sun", "cloud", "mountain", "snowman"],
     "human": ["face", "hand", "eye", "nose", "ear", "mouse", "feet"],
-    "object": ["apple", "banana", "phone", "clock", "chair", "cup", "book"]
+    "object": ["apple", "chair"]
 }
 
 CATEGORY_LIST = list(LABELS.keys())
+
+LABELS_KO = {
+    "animal": "동물",
+    "vehicle": "탈것",
+    "nature": "자연",
+    "human": "사람",
+    "object": "사물",
+    "cat": "고양이",
+    "dog": "강아지",
+    "lion": "사자",
+    "elephant": "코끼리",
+    "rabbit": "토끼",
+    "fish": "물고기",
+    "whale": "고래",
+    "car": "자동차",
+    "bus": "버스",
+    "airplane": "비행기",
+    "bicycle": "자전거",
+    "train": "기차",
+    "rocket": "로켓",
+    "ship": "배",
+    "face": "얼굴",
+    "hand": "손",
+    "eye": "눈",
+    "nose": "코",
+    "ear": "귀",
+    "mouse": "입",
+    "feet": "발",
+    "apple": "사과",
+    "clock": "시계",
+    "chair": "의자",
+}
 
 # =========================
 # 🔥 Edge 기반 전처리 함수
@@ -121,7 +151,9 @@ async def clip_test(image: UploadFile = File(...)):
         return {
             "status": "unknown",
             "category": None,
+            "category_ko": None,
             "guess": None,
+            "guess_ko": None,
             "confidence": round(category_conf, 2)
         }
 
@@ -148,6 +180,8 @@ async def clip_test(image: UploadFile = File(...)):
     return {
         "status": status,
         "category": best_category,
+        "category_ko": LABELS_KO.get(best_category, best_category),
         "guess": best_label,
+        "guess_ko": LABELS_KO.get(best_label, best_label),
         "confidence": round(label_conf, 2)
     }

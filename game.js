@@ -62,16 +62,20 @@ const Game = {
   },
 
   showResult(data) {
-    const { guess, confidence } = data;
+    const { guess, guess_ko, confidence } = data;
+    const displayGuess = guess && guess_ko ? `${guess_ko}(${guess})` : guess_ko || guess;
 
     document.getElementById('result-text').innerText = 'AI 푸앙의 추측';
 
-    if (confidence >= 0.8) {
+    if (!displayGuess) {
       document.getElementById('ai-thought').innerText =
-        `이거 완전 "${guess}"같다푸앙!`;
+        '흠… 잘 모르겠푸앙...';
+    } else if (confidence >= 0.8) {
+      document.getElementById('ai-thought').innerText =
+        `이거 완전 "${displayGuess}"같다푸앙!`;
     } else if (confidence >= 0.5) {
       document.getElementById('ai-thought').innerText =
-        `혹시 "${guess}"인 거냐푸앙?`;
+        `혹시 "${displayGuess}"인 거냐푸앙?`;
     } else {
       document.getElementById('ai-thought').innerText =
         '흠… 잘 모르겠푸앙...';
