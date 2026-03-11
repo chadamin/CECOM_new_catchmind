@@ -33,14 +33,12 @@ model, preprocess = clip.load("ViT-B/32", device=device)
 # 2단계 라벨 구조 (8 카테고리 / 50 세부)
 # =========================
 LABELS = {
-    "animal": ["cat", "dog", "lion", "elephant", "rabbit", "fish"],
+    "animal": ["cat", "dog", "lion", "elephant", "rabbit", "fish", "whale"],
     "shape": ["triangle", "square", "circle", "star", "heart", "arrow", "crescent moon"],
-    "vehicle": ["car", "bus", "airplane", "bicycle", "train", "rocket"],
-    "building": ["house", "school", "church", "castle", "bridge", "tower"],
+    "vehicle": ["car", "bus", "airplane", "bicycle", "train", "rocket","ship"],
     "nature": ["tree", "flower", "sun", "cloud", "mountain", "snowman"],
-    "human": ["person", "face", "hand", "eye", "smile", "running person"],
-    "object": ["apple", "banana", "phone", "clock", "chair", "cup", "book"],
-    "symbol": ["fire", "lightning", "skull", "crown", "gift box", "camera"]
+    "human": ["face", "hand", "eye", "nose", "ear", "mouse", "feet"],
+    "object": ["apple", "banana", "phone", "clock", "chair", "cup", "book"]
 }
 
 CATEGORY_LIST = list(LABELS.keys())

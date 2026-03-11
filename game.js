@@ -31,7 +31,7 @@ const Game = {
       return;
     }
 
-    document.getElementById('result-text').innerText = 'AI 생각 중...';
+    document.getElementById('result-text').innerText = 'AI푸앙 생각 중...';
     document.getElementById('ai-thought').innerText = '';
 
     const canvas = Canvas.get();
@@ -64,17 +64,17 @@ const Game = {
   showResult(data) {
     const { guess, confidence } = data;
 
-    document.getElementById('result-text').innerText = 'AI의 추측';
+    document.getElementById('result-text').innerText = 'AI 푸앙의 추측';
 
     if (confidence >= 0.8) {
       document.getElementById('ai-thought').innerText =
-        `이건 거의 "${guess}" 같아요! 😄`;
+        `이거 완전 "${guess}"같다푸앙!`;
     } else if (confidence >= 0.5) {
       document.getElementById('ai-thought').innerText =
-        `혹시 "${guess}"을(를) 그렸나요? 🤔`;
+        `혹시 "${guess}"인 거냐푸앙?`;
     } else {
       document.getElementById('ai-thought').innerText =
-        '음… 잘 모르겠어요 😅';
+        '흠… 잘 모르겠푸앙...';
     }
   },
 
