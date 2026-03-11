@@ -8,14 +8,20 @@ const Timer = {
     this.time = this.duration;
 
     const bar = document.getElementById("chalk-bar");
+    const text = document.getElementById("timer-text"); // 추가
+
     bar.style.width = "100%";
-    bar.style.backgroundColor = "#f5f5f5"; // 고정 분필색
+    bar.style.backgroundColor = "#f5f5f5";
+
+    text.textContent = this.time; // 시작 숫자 표시
 
     this.interval = setInterval(() => {
       this.time--;
 
       const percent = (this.time / this.duration) * 100;
       bar.style.width = percent + "%";
+
+      text.textContent = this.time; // 🔥 숫자 업데이트
 
       if (this.time <= 0) {
         this.stop();
@@ -37,7 +43,11 @@ const Timer = {
     this.time = this.duration;
 
     const bar = document.getElementById("chalk-bar");
+    const text = document.getElementById("timer-text"); // 추가
+
     bar.style.width = "100%";
     bar.style.backgroundColor = "#f5f5f5";
+
+    text.textContent = this.time; // 리셋 숫자
   }
 };

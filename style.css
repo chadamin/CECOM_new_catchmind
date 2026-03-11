@@ -130,11 +130,21 @@ main {
   transform: translateX(-50%) rotate(-0.5deg);
 
   width: 54%;
-  height: 10px;
+  height: 12px;
+
+  display: flex;
+  align-items: center;
+  gap: 14px;
+
   pointer-events: none;
 }
 
-.chalk-bar {
+.chalk-bar-wrap{
+  flex: 1;
+  height: 100%;
+}
+
+.chalk-bar{
   height: 100%;
   width: 100%;
   border-radius: 5px;
@@ -144,6 +154,12 @@ main {
     #f5f5f5 92%,
     rgba(255,255,255,0.2) 100%
   );
+}
+
+#timer-text{
+  font-family: 'Press Start 2P', cursive;
+  font-size: 16px;
+  color: #f5f5f5;
 }
 
 /* =====================
