@@ -8,7 +8,7 @@ import numpy as np
 import cv2
 
 # =========================
-# App
+# FastAPI
 # =========================
 app = FastAPI()
 
@@ -24,19 +24,19 @@ def root():
     return {"status": "server alive"}
 
 # =========================
-# CLIP Model (1회 로드)
+# CLIP MODEL
 # =========================
 device = "cuda" if torch.cuda.is_available() else "cpu"
 model, preprocess = clip.load("ViT-B/32", device=device)
 
 # =========================
-# 2단계 라벨 구조 (8 카테고리 / 50 세부)
+# LABELS
 # =========================
 LABELS = {
-    "animal": ["cat", "dog", "lion", "elephant", "rabbit", "fish", "whale"],
-    "vehicle": ["car", "bus", "airplane", "bicycle", "train", "rocket","ship"],
-    "human": ["face", "hand", "eye", "nose", "ear", "mouse", "feet"],
-    "object": ["apple", "chair"]
+    "animal": ["cat", "dog", "lion", "elephant", "rabbit", "fish", "bird"],
+    "vehicle": ["car", "bus", "bicycle", "train", "airplane"],
+    "object": ["chair", "clock", "book", "cup", "scissors", "key"],
+    "food": ["pizza", "hamburger", "ice cream", "banana"]
 }
 
 CATEGORY_LIST = list(LABELS.keys())
@@ -44,9 +44,9 @@ CATEGORY_LIST = list(LABELS.keys())
 LABELS_KO = {
     "animal": "동물",
     "vehicle": "탈것",
-    "nature": "자연",
-    "human": "사람",
     "object": "사물",
+    "food": "음식",
+
     "cat": "고양이",
     "dog": "강아지",
     "lion": "사자",
@@ -54,6 +54,7 @@ LABELS_KO = {
     "rabbit": "토끼",
     "fish": "물고기",
     "whale": "고래",
+
     "car": "자동차",
     "bus": "버스",
     "airplane": "비행기",
@@ -61,110 +62,159 @@ LABELS_KO = {
     "train": "기차",
     "rocket": "로켓",
     "ship": "배",
-    "face": "얼굴",
-    "hand": "손",
-    "eye": "눈",
-    "nose": "코",
-    "ear": "귀",
-    "mouse": "입",
-    "feet": "발",
+
+    "pizza": "피자",
+    "hamburger": "햄버거",
+    "cake": "케이크",
+    "ice cream": "아이스크림",
+    "donut": "도넛",
+    "banana": "바나나",
+    "sandwich": "샌드위치",
+
     "apple": "사과",
-    "clock": "시계",
     "chair": "의자",
+    "clock": "시계",
+    "book": "책",
+    "phone": "휴대폰",
+    "cup": "컵"
 }
 
 # =========================
-# 🔥 Edge 기반 전처리 함수
+# Edge preprocessing (완화)
 # =========================
 def extract_edges(image):
+
     img_np = np.array(image)
 
-    # 1. grayscale
     gray = cv2.cvtColor(img_np, cv2.COLOR_RGB2GRAY)
 
-    # 2. blur (노이즈 제거)
-    blur = cv2.GaussianBlur(gray, (5, 5), 0)
+    edges = cv2.Canny(gray, 80, 180)
 
-    # 3. Canny edge detection
-    edges = cv2.Canny(blur, 50, 150)
-
-    # 4. 선 두껍게
-    kernel = np.ones((2, 2), np.uint8)
-    edges = cv2.dilate(edges, kernel, iterations=1)
-
-    # 5. 흰 배경 + 검은 선 재구성
     result = np.ones((edges.shape[0], edges.shape[1], 3), dtype=np.uint8) * 255
     result[edges != 0] = [0, 0, 0]
 
     return Image.fromarray(result)
 
 # =========================
-# 정사각 패딩
+# Square padding
 # =========================
-def square_pad(image, fill_color=(255, 255, 255)):
-    w, h = image.size
-    max_dim = max(w, h)
-    new_img = Image.new("RGB", (max_dim, max_dim), fill_color)
-    new_img.paste(image, ((max_dim - w) // 2, (max_dim - h) // 2))
+def square_pad(image, fill_color=(255,255,255)):
+
+    w,h = image.size
+    max_dim = max(w,h)
+
+    new_img = Image.new("RGB",(max_dim,max_dim),fill_color)
+    new_img.paste(image,((max_dim-w)//2,(max_dim-h)//2))
+
     return new_img
 
 # =========================
-# CLIP 추론 함수
+# Prompt templates (CLIP sketch 최적)
 # =========================
-def clip_inference(image_input, labels):
-    prompts = [f"a black outline drawing of a {l}" for l in labels]
-    text_tokens = clip.tokenize(prompts).to(device)
+PROMPT_TEMPLATES = [
+    "a simple sketch of a {}",
+    "a doodle of a {}",
+    "a line drawing of a {}"
+]
+
+# =========================
+# TEXT FEATURE CACHE
+# =========================
+TEXT_FEATURE_CACHE = {}
+
+def get_text_features(labels):
+
+    key = tuple(labels)
+
+    if key in TEXT_FEATURE_CACHE:
+        return TEXT_FEATURE_CACHE[key]
+
+    prompts = []
+
+    for label in labels:
+        for template in PROMPT_TEMPLATES:
+            prompts.append(template.format(label))
+
+    tokens = clip.tokenize(prompts).to(device)
 
     with torch.no_grad():
-        image_features = model.encode_image(image_input)
-        text_features = model.encode_text(text_tokens)
-        similarity = (image_features @ text_features.T).softmax(dim=-1)[0]
+        text_features = model.encode_text(tokens)
 
-    best_idx = similarity.argmax().item()
-    confidence = float(similarity[best_idx])
+        text_features /= text_features.norm(dim=-1, keepdim=True)
 
-    return labels[best_idx], confidence
+    TEXT_FEATURE_CACHE[key] = text_features
 
+    return text_features
 
 # =========================
-# 2단계 분류 엔드포인트
+# CLIP inference
+# =========================
+def clip_inference(image_input, labels):
+
+    text_features = get_text_features(labels)
+
+    with torch.no_grad():
+
+        image_features = model.encode_image(image_input)
+
+        image_features /= image_features.norm(dim=-1, keepdim=True)
+
+        logit_scale = model.logit_scale.exp()
+
+        similarity = logit_scale * (image_features @ text_features.T)
+
+        similarity = similarity.reshape(len(labels), len(PROMPT_TEMPLATES))
+
+        similarity = similarity.mean(dim=1)
+
+        probs = similarity.softmax(dim=0)
+
+    best_idx = probs.argmax().item()
+
+    return labels[best_idx], probs[best_idx].item()
+
+# =========================
+# API
 # =========================
 @app.post("/clip-test")
 async def clip_test(image: UploadFile = File(...)):
+
     image_bytes = await image.read()
+
     image_pil = Image.open(io.BytesIO(image_bytes)).convert("RGB")
 
-    # 🔥 Edge 전처리 적용
+    # edge
     image_pil = extract_edges(image_pil)
 
-    # 🔥 정사각 패딩
+    # padding
     image_pil = square_pad(image_pil)
 
     image_input = preprocess(image_pil).unsqueeze(0).to(device)
 
     # =====================
-    # 1️⃣ 카테고리 분류
+    # 1️⃣ CATEGORY
     # =====================
     best_category, category_conf = clip_inference(image_input, CATEGORY_LIST)
 
     if category_conf < 0.20:
         return {
-            "status": "unknown",
-            "category": None,
-            "category_ko": None,
-            "guess": None,
-            "guess_ko": None,
-            "confidence": round(category_conf, 2)
+            "status":"unknown",
+            "category":None,
+            "category_ko":None,
+            "guess":None,
+            "guess_ko":None,
+            "confidence":round(category_conf,2)
         }
 
     # =====================
-    # 2️⃣ 세부 라벨 분류
+    # 2️⃣ SUB LABEL
     # =====================
     sub_labels = LABELS[best_category]
+
     best_label, label_conf = clip_inference(image_input, sub_labels)
 
     # =====================
-    # Confidence 판단
+    # confidence level
     # =====================
     if label_conf >= 0.30:
         status = "strong"
@@ -175,13 +225,13 @@ async def clip_test(image: UploadFile = File(...)):
     else:
         status = "unknown"
 
-    print("DEBUG →", best_category, best_label, round(label_conf, 3))
+    print("DEBUG →", best_category, best_label, round(label_conf,3))
 
     return {
-        "status": status,
-        "category": best_category,
-        "category_ko": LABELS_KO.get(best_category, best_category),
-        "guess": best_label,
-        "guess_ko": LABELS_KO.get(best_label, best_label),
-        "confidence": round(label_conf, 2)
+        "status":status,
+        "category":best_category,
+        "category_ko":LABELS_KO.get(best_category,best_category),
+        "guess":best_label,
+        "guess_ko":LABELS_KO.get(best_label,best_label),
+        "confidence":round(label_conf,2)
     }
