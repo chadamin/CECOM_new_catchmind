@@ -198,7 +198,7 @@ main {
   font-family: 'ImHyeMin', sans-serif;
   font-weight: 700; /* Bold */
 
-  font-size: 70px;
+  font-size: 65px;
   color: #2b2b2b;
 }
 
@@ -279,7 +279,7 @@ main {
 
 .start-btn {
   position: absolute;
-  bottom: 220px;
+  bottom: 250px;
   left: 50%;
   transform: translateX(-50%);
 
